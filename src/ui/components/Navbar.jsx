@@ -1,13 +1,15 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../auth";
 
 export const Navbar = () => {
 
     const links = ["Marvel", "DC", "Search", "Hero"];
     const divRef = useRef(null);
     const iconRef = useRef(null);
+    const { user } = useContext( AuthContext );
     const navigate = useNavigate();
-
+    
     const onLogout = () => {
         // reemplaza la ruta a la cual regresa
         navigate('/login', {
@@ -49,7 +51,7 @@ export const Navbar = () => {
 
                     <div className="flex items-center gap-[2vw]">
                         <span className="font-bold text-blue-800">
-                            Jose
+                            { user.name }
                         </span>
                         <button
                             onClick={onLogout}
